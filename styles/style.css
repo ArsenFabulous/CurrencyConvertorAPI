@@ -1,0 +1,68 @@
+body {
+    padding: 0%;
+    margin: 0%;
+}
+
+.convertor {
+    display: grid;
+    grid-template-columns: 20vw 6vw 20vw;
+    grid-template-rows: 30vh;
+    padding: 2%;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Noto Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.switcher {
+    margin-top: 6vh;
+    margin-right: 3vh;
+    margin-left: 3vh;
+}
+
+
+.block {}
+
+.amount {
+    font-size: 300%;
+    font-family: 'Noto Sans Malayalam';
+    font-weight: bold;
+    margin: 1vh;
+}
+
+.country-currency {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+
+
+}
+
+.country-currency * {
+    text-align: center;
+    border: #cdcdcd 1px solid;
+    padding: 1vh;
+}
+
+.name {
+    color: white;
+    background-color: #228D57;
+}
+
+.count {
+    border: #cdcdcd 1px solid;
+}
+
+.currency-to-one {
+    color: gray;
+    margin: 1vh;
+
+}
+
+.currency-like {
+    color: gray;
+}
