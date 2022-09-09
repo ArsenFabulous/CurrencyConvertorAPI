@@ -3,6 +3,16 @@ body {
     margin: 0%;
 }
 
+input {
+    border: 0px;
+    background-color: transparent;
+    width: 19vw;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none !important;
+  }
+
 .convertor {
     display: grid;
     grid-template-columns: 20vw 6vw 20vw;
@@ -21,10 +31,16 @@ body {
     margin-left: 3vh;
 }
 
+.switcher:hover {
+    stroke: #cdcdcd;
+    fill:#cdcdcd;
+    
+}
+
 
 .block {}
 
-.amount {
+.amount, .recalculation {
     font-size: 300%;
     font-family: 'Noto Sans Malayalam';
     font-weight: bold;
