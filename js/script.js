@@ -15,17 +15,12 @@ fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=USD%2CEUR&base
   .catch(error => console.log('error', error));
 */
 
-let regex = /[ ]/g;
+let currencyArray = document.querySelectorAll('.currency-name');
+console.dir(currencyArray);
 
-let amount = document.querySelector('.amount');
+currencyArray.onclick = function (element) {
 
-amount.oninput = function () {
-  this.value = this.value.replace(regex, '');    //попробовать сделать общую функцию
+
 }
 
-let recalculation = document.querySelector('.recalculation');
-
-recalculation.oninput = function () {
-  this.value = this.value.replace(regex, '');
-}
 
