@@ -64,7 +64,7 @@ input:focus, textarea:focus, select:focus {
     padding: 1vh;
 }
 
-.name {
+.active {
     color: white;
     background-color: #228D57;
 }
