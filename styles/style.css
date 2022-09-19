@@ -9,9 +9,11 @@ input {
     width: 19vw;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
     outline: none !important;
-  }
+}
 
 .convertor {
     display: grid;
@@ -33,14 +35,14 @@ input:focus, textarea:focus, select:focus {
 
 .switcher:hover {
     stroke: #cdcdcd;
-    fill:#cdcdcd;
-    
-}
+    fill: #cdcdcd;
 
+}
 
 .block {}
 
-.amount, .recalculation {
+.amount,
+.recalculation {
     font-size: 300%;
     font-family: 'Noto Sans Malayalam';
     font-weight: bold;
@@ -54,8 +56,6 @@ input:focus, textarea:focus, select:focus {
     margin-right: auto;
     margin-top: 1vh;
     margin-bottom: 1vh;
-
-
 }
 
 .country-currency * {
