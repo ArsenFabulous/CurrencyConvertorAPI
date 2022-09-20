@@ -25,20 +25,23 @@ const usd = document.querySelector('.usd');
 const eur = document.querySelector('.eur');
 
 //функция для передачи ключа
-function indexation(index, whichIndex) {
+function indexation(index, whichIndex, classTo) {
   whichIndex = index;
   console.log(whichIndex);
   return whichIndex;
 }
 //передача индекса по клику
 rub.addEventListener("click", function () {
-  return myCurrencyIndex = indexation(0, myCurrencyIndex);
+  localClassSwitch(1);
+  return myCurrencyIndex = indexation(0, myCurrencyIndex, rub);
 });
 usd.addEventListener("click", function () {
-  return myCurrencyIndex = indexation(1, myCurrencyIndex);
+  localClassSwitch(1);
+  return myCurrencyIndex = indexation(1, myCurrencyIndex, usd);
 });
 eur.addEventListener("click", function () {
-  return myCurrencyIndex = indexation(2, myCurrencyIndex);
+  localClassSwitch(1);
+  return myCurrencyIndex = indexation(2, myCurrencyIndex, eur);
 })
 
 //Хочу купить
@@ -48,19 +51,22 @@ const oEur = document.querySelector('.o-eur');
 
 //передача индекса по клику
 oRub.addEventListener("click", function () {
-  return otherCurrencyIndex = indexation(0, otherCurrencyIndex);
+  localClassSwitch();
+  return otherCurrencyIndex = indexation(0, otherCurrencyIndex, oRub);
 });
 oUsd.addEventListener("click", function () {
-  return otherCurrencyIndex = indexation(1, otherCurrencyIndex);
+  localClassSwitch();
+  return otherCurrencyIndex = indexation(1, otherCurrencyIndex, oUsd);
 });
 oEur.addEventListener("click", function () {
-  return otherCurrencyIndex = indexation(2, otherCurrencyIndex);
+  localClassSwitch();
+  return otherCurrencyIndex = indexation(2, otherCurrencyIndex, oEur);
 })
 
 const switcher = document.getElementById('Capa_1');
 
 switcher.addEventListener("click", function () {
-  switchCurrency();
+  switchCurrencyIndex();
 });
 
 function switchCurrencyIndex() {
@@ -71,5 +77,16 @@ function switchCurrencyIndex() {
 };
 
 function switchCurrencyClass() {
-  if (myCurrencyIndex === otherCurrencyIndex) {return};
-} 
+  if (myCurrencyIndex === otherCurrencyIndex) { return };
+
+}
+//функция для изменения отображения в меню
+function localClassSwitch(left) {
+  left ?
+    document.querySelectorAll('.currency-name')
+      .forEach(n => n.classList.remove('active'))
+    :
+    document.querySelectorAll('.o-currency-name')
+      .forEach(n => n.classList.remove('active'))
+  event.target.classList.add('active');
+}
