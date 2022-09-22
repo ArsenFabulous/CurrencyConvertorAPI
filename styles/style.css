@@ -15,6 +15,11 @@ select:focus {
     outline: none !important;
 }
 
+.currency-name,
+.o-currency-name {
+    cursor: pointer;
+}
+
 .convertor {
     display: grid;
     grid-template-columns: 20vw 6vw 20vw;
@@ -28,9 +33,11 @@ select:focus {
 }
 
 .switcher {
+    cursor: pointer;
+    width: 3.5vw;
     margin-top: 6vh;
     margin-right: 3vh;
-    margin-left: 3vh;
+    margin-left: 2.5vh;
 }
 
 .switcher:hover {
@@ -80,5 +87,6 @@ select:focus {
 }
 
 .currency-like {
+    user-select: none;      
     color: gray;
 }
