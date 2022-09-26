@@ -1,6 +1,5 @@
 // API exchange rates
 
-/*
 var myHeaders = new Headers();
 myHeaders.append("apikey", "75r16726IFyt9K5HSCuBZ9I516KKlzMz");
 var requestOptions = {
@@ -8,20 +7,26 @@ var requestOptions = {
   redirect: 'follow',
   headers: myHeaders
 };
-fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=USD%2CEUR&base=RUB", requestOptions)
-.then((response) => {
-  return response.json(); // я так думаю он вренул в дату resonse
-})
-.then((data) => {
-  
-  console.log(data);
-   console.log(data.date);
+
+
+function getCurrencies () {
+  fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=USD%2CEUR&base=RUB", requestOptions)
+  .then((response) => response.json())
+  .then ((data) => { console.log(data)
+     
+  localStorage.setItem( 'USD',data.rates.USD)
+  localStorage.setItem( 'EUR',data.rates.EUR)
 })
   .catch(error => console.log('error', error));
+}
+getCurrencies();
+
+
 
 
 //рассмотреть подробнее как работают промисы
-*/
+
+
 
 let myCurrencyIndex = 0; //ключ для переключения валют (У меня есть)
 let switcherCurrency  //промежуточный ключ
