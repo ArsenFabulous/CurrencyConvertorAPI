@@ -8,7 +8,7 @@ var requestOptions = {
   headers: myHeaders
 };
 
-Window.addEventListener("onload", function () {
+Window.addEventListener("load", function () {
   if (!localStorage.getItem('USD') && !localStorage.getItem('EUR')) {
     getCurrencies();
   }
