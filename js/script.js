@@ -8,25 +8,26 @@ var requestOptions = {
   headers: myHeaders
 };
 
+Window.addEventListener("onload", function () {
+  if (!localStorage.getItem('USD') && !localStorage.getItem('EUR')) {
+    getCurrencies();
+  }
+});
 
 function getCurrencies () {
   fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=USD%2CEUR&base=RUB", requestOptions)
   .then((response) => response.json())
-  .then ((data) => { console.log(data)
-     
+  .then ((data) => {  
   localStorage.setItem( 'USD',data.rates.USD)
   localStorage.setItem( 'EUR',data.rates.EUR)
+  console.log(1)
 })
   .catch(error => console.log('error', error));
-}
-getCurrencies();
+};
 
 
-
-
-//рассмотреть подробнее как работают промисы
-
-
+let usdCurrency = localStorage.getItem('USD');
+let eurCurrency = localStorage.getItem('EUR');
 
 let myCurrencyIndex = 0; //ключ для переключения валют (У меня есть)
 let switcherCurrency  //промежуточный ключ
