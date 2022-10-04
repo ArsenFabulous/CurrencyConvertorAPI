@@ -20,15 +20,16 @@ function getCurrencies() {
 
 window.addEventListener("load", async function () {
   greyCurrencyChange();
+  inputChange();
   if (!localStorage.getItem('USD') && !localStorage.getItem('EUR')) {
     await getCurrencies();
-    
+
   } else {
     console.log('всё нормально');
   }
 });
 
-//валюты относительно рубля
+//полчунные валюты (относительно рубля)
 let rubCurrency = 1;
 let usdCurrency = localStorage.getItem('USD');
 console.log(usdCurrency);
@@ -65,18 +66,24 @@ rub.addEventListener("click", function () {
   localClassSwitch(1);
   greyTextCurrencyChange(greyLeftText, 'RUB');
   valueation(rubCurrency, 1);
+  greyCurrencyChange();
+  inputChangeRight(1);
   return myCurrencyIndex = indexation(0, myCurrencyIndex, rub);
 });
 usd.addEventListener("click", function () {
   localClassSwitch(1);
   valueation(usdCurrency, 1);
   greyTextCurrencyChange(greyLeftText, 'USD');
+  greyCurrencyChange();
+  inputChangeRight(1);
   return myCurrencyIndex = indexation(1, myCurrencyIndex, usd);
 });
 eur.addEventListener("click", function () {
   localClassSwitch(1);
   valueation(eurCurrency, 1);
   greyTextCurrencyChange(greyLeftText, 'EUR');
+  greyCurrencyChange();
+  inputChangeRight(1);
   return myCurrencyIndex = indexation(2, myCurrencyIndex, eur);
 })
 
@@ -85,18 +92,24 @@ oRub.addEventListener("click", function () {
   localClassSwitch();
   valueation(rubCurrency);
   greyTextCurrencyChange(greyRightText, 'RUB');
+  greyCurrencyChange();
+  inputChangeRight();
   return otherCurrencyIndex = indexation(0, otherCurrencyIndex, oRub);
 });
 oUsd.addEventListener("click", function () {
   localClassSwitch();
   valueation(usdCurrency);
   greyTextCurrencyChange(greyRightText, 'USD');
+  greyCurrencyChange();
+  inputChangeRight();
   return otherCurrencyIndex = indexation(1, otherCurrencyIndex, oUsd);
 });
 oEur.addEventListener("click", function () {
   localClassSwitch();
   valueation(eurCurrency);
   greyTextCurrencyChange(greyRightText, 'EUR');
+  greyCurrencyChange();
+  inputChangeRight();
   return otherCurrencyIndex = indexation(2, otherCurrencyIndex, oEur);
 })
 
@@ -116,6 +129,8 @@ const switcher = document.getElementById('Capa_1'); //svg стрелки в се
 switcher.addEventListener("click", function () {
   switchCurrency();
   switchCurrencyClass();
+  greyCurrencyChange();
+  inputChange();
 });
 
 //свитчит индексы и валюты 
@@ -127,7 +142,7 @@ function switchCurrency() {
   valueLeft = valueRight;
   valueRight = valueOther;
   console.dir([myCurrencyIndex, otherCurrencyIndex, switcherCurrency]);
-  console.dir([valueLeft,valueRight]);
+  console.dir([valueLeft, valueRight]);
 };
 
 //свитчит класс и серый текст по нажатию на svg стрелки
@@ -182,11 +197,39 @@ const greyRightCurrency = document.getElementById('grey-right-currency');
 //меняет пересчёт валюты по умолчанию
 function valueation(whichCurrency, leftOrRight) {
   leftOrRight === 1 ? valueLeft = whichCurrency : valueRight = whichCurrency;
-  console.log(valueLeft);
+  console.log(`левые ${valueLeft}`);
+  console.log(`правые ${valueRight}`);
 };
 //добавить эту функцию везде, где меняется валюта 
 function greyCurrencyChange() {
-  greyLeftCurrency.textContent = valueRight;
-  greyRightCurrency.textContent = 1/valueRight;
-  console.log('поменял серые')
+  greyLeftCurrency.textContent = valueRight / valueLeft;
+  greyRightCurrency.textContent = valueLeft / valueRight;
+  console.log('поменял серые');
+};
+
+//изменение стоимости на input
+let inputAmount = document.querySelector('.amount');
+let inputRecalculation = document.querySelector('.recalculation');
+
+inputAmount.addEventListener('input', function () {
+  inputChangeRight();
+});
+
+inputRecalculation.addEventListener('input', function () {
+  inputChangeLeft();
+});
+// для svg стрелок
+function inputChange() {
+  inputRecalculation.value = (inputAmount.value * valueRight/valueLeft).toFixed(4);
+};
+// для левого меню и левого input
+function inputChangeLeft() {
+  inputAmount.value = (inputRecalculation.value * valueRight / valueLeft).toFixed(4);
+  console.log('Левый ввод')
+};
+// для правого меню и правого input
+function inputChangeRight(leftInput) {
+  !leftInput
+    ? inputRecalculation.value = (inputAmount.value * valueRight / valueLeft).toFixed(4)
+    : inputRecalculation.value = (inputAmount.value * valueLeft / valueRight).toFixed(4);
 };
