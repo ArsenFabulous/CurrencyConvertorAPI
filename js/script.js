@@ -8,12 +8,14 @@ var requestOptions = {
   headers: myHeaders
 };
 
-function getCurrencies() {
+function getCurrenciesAndTime() {
   fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=USD%2CEUR&base=RUB", requestOptions)
     .then((response) => response.json())
+
     .then((data) => {
       localStorage.setItem('USD', data.rates.USD)
       localStorage.setItem('EUR', data.rates.EUR)
+      localStorage.setItem('time', data.timestamp)
     })
     .catch(error => console.log('error', error));
 };
@@ -22,10 +24,10 @@ window.addEventListener("load", async function () {
   greyCurrencyChange();
   inputChange();
   if (!localStorage.getItem('USD') && !localStorage.getItem('EUR')) {
-    await getCurrencies();
+    await getCurrenciesAndTime();
 
   } else {
-    console.log('всё нормально');
+    console.log('без подзагрузки');
   }
 });
 
@@ -56,7 +58,7 @@ const oUsd = document.querySelector('.o-usd');
 const oEur = document.querySelector('.o-eur');
 
 //функция для передачи ключа
-function indexation(index, whichIndex, classTo) {
+function indexation(index, whichIndex) {
   whichIndex = index;
   console.log(whichIndex);
   return whichIndex;
@@ -68,7 +70,7 @@ rub.addEventListener("click", function () {
   valueation(rubCurrency, 1);
   greyCurrencyChange();
   inputChangeRight(1);
-  return myCurrencyIndex = indexation(0, myCurrencyIndex, rub);
+  return myCurrencyIndex = indexation(0, myCurrencyIndex);
 });
 usd.addEventListener("click", function () {
   localClassSwitch(1);
@@ -76,7 +78,7 @@ usd.addEventListener("click", function () {
   greyTextCurrencyChange(greyLeftText, 'USD');
   greyCurrencyChange();
   inputChangeRight(1);
-  return myCurrencyIndex = indexation(1, myCurrencyIndex, usd);
+  return myCurrencyIndex = indexation(1, myCurrencyIndex);
 });
 eur.addEventListener("click", function () {
   localClassSwitch(1);
@@ -84,7 +86,7 @@ eur.addEventListener("click", function () {
   greyTextCurrencyChange(greyLeftText, 'EUR');
   greyCurrencyChange();
   inputChangeRight(1);
-  return myCurrencyIndex = indexation(2, myCurrencyIndex, eur);
+  return myCurrencyIndex = indexation(2, myCurrencyIndex);
 })
 
 //справа передача индекса по клику
@@ -94,7 +96,7 @@ oRub.addEventListener("click", function () {
   greyTextCurrencyChange(greyRightText, 'RUB');
   greyCurrencyChange();
   inputChangeRight();
-  return otherCurrencyIndex = indexation(0, otherCurrencyIndex, oRub);
+  return otherCurrencyIndex = indexation(0, otherCurrencyIndex);
 });
 oUsd.addEventListener("click", function () {
   localClassSwitch();
@@ -102,7 +104,7 @@ oUsd.addEventListener("click", function () {
   greyTextCurrencyChange(greyRightText, 'USD');
   greyCurrencyChange();
   inputChangeRight();
-  return otherCurrencyIndex = indexation(1, otherCurrencyIndex, oUsd);
+  return otherCurrencyIndex = indexation(1, otherCurrencyIndex);
 });
 oEur.addEventListener("click", function () {
   localClassSwitch();
@@ -110,8 +112,8 @@ oEur.addEventListener("click", function () {
   greyTextCurrencyChange(greyRightText, 'EUR');
   greyCurrencyChange();
   inputChangeRight();
-  return otherCurrencyIndex = indexation(2, otherCurrencyIndex, oEur);
-})
+  return otherCurrencyIndex = indexation(2, otherCurrencyIndex);
+});
 
 //функция для изменения отображения выбранной валюты в меню
 let leftCurrencyNames = document.querySelectorAll('.currency-name');
@@ -200,10 +202,10 @@ function valueation(whichCurrency, leftOrRight) {
   console.log(`левые ${valueLeft}`);
   console.log(`правые ${valueRight}`);
 };
-//добавить эту функцию везде, где меняется валюта 
+
 function greyCurrencyChange() {
-  greyLeftCurrency.textContent = valueRight / valueLeft;
-  greyRightCurrency.textContent = valueLeft / valueRight;
+  greyLeftCurrency.textContent = (valueRight / valueLeft).toFixed(4);
+  greyRightCurrency.textContent = (valueLeft / valueRight).toFixed(4);
   console.log('поменял серые');
 };
 
@@ -220,12 +222,11 @@ inputRecalculation.addEventListener('input', function () {
 });
 // для svg стрелок
 function inputChange() {
-  inputRecalculation.value = (inputAmount.value * valueRight/valueLeft).toFixed(4);
+  inputRecalculation.value = (inputAmount.value * valueRight / valueLeft).toFixed(4);
 };
 // для левого меню и левого input
 function inputChangeLeft() {
   inputAmount.value = (inputRecalculation.value * valueRight / valueLeft).toFixed(4);
-  console.log('Левый ввод')
 };
 // для правого меню и правого input
 function inputChangeRight(leftInput) {
@@ -233,3 +234,6 @@ function inputChangeRight(leftInput) {
     ? inputRecalculation.value = (inputAmount.value * valueRight / valueLeft).toFixed(4)
     : inputRecalculation.value = (inputAmount.value * valueLeft / valueRight).toFixed(4);
 };
+
+let timeMark = document.querySelector('.timestamp');
+timeMark.textContent = (`Данные за ${(new Date(Number(`${localStorage.getItem('time')}000`)))}`);
