@@ -6,7 +6,7 @@ body {
 input {
     border: 0px;
     background-color: transparent;
-    width: 19vw;
+    
 }
 
 input:focus,
@@ -15,29 +15,37 @@ select:focus {
     outline: none !important;
 }
 
+.timestamp {
+    color: grey;
+    margin:0;
+    padding: 0;
+    font-size: 90%;
+    width: 50vw;
+}
+
 .currency-name,
 .o-currency-name {
     cursor: pointer;
 }
 
 .convertor {
-    display: grid;
-    grid-template-columns: 20vw 6vw 20vw;
-    grid-template-rows: 30vh;
+    
+    flex-wrap:wrap;
+    display: flex;
+
     padding: 2%;
     justify-content: center;
     align-items: center;
     font-family: 'Noto Sans', sans-serif;
-    margin: 0;
+
     padding: 0;
 }
 
 .switcher {
     cursor: pointer;
-    width: 3.5vw;
-    margin-top: 6vh;
-    margin-right: 3vh;
-    margin-left: 2.5vh;
+    width: 5vh;
+    margin: 0;
+    padding: 0%;
 }
 
 .switcher:hover {
@@ -46,14 +54,14 @@ select:focus {
 
 }
 
-.block {}
 
 .amount,
 .recalculation {
-    font-size: 300%;
+    font-size: 4vw;
     font-family: 'Noto Sans Malayalam';
     font-weight: bold;
     margin: 1vh;
+    
 }
 
 .country-currency {
@@ -87,6 +95,6 @@ select:focus {
 }
 
 .currency-like {
-    user-select: none;      
+    user-select: none;
     color: gray;
 }
