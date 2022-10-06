@@ -6,7 +6,6 @@ body {
 input {
     border: 0px;
     background-color: transparent;
-    
 }
 
 input:focus,
@@ -17,10 +16,11 @@ select:focus {
 
 .timestamp {
     color: grey;
-    margin:0;
+    margin: 0;
+    margin-top: 1.5vw;
     padding: 0;
-    font-size: 90%;
-    width: 50vw;
+    font-size: 85%;
+    width: 30vw;
 }
 
 .currency-name,
@@ -28,40 +28,82 @@ select:focus {
     cursor: pointer;
 }
 
-.convertor {
-    
-    flex-wrap:wrap;
-    display: flex;
+@media screen and (min-width: 525px) {
+    .convertor {
+        display: grid;
+        grid-template-columns: 26vw 5vw 26vw;
+        grid-template-rows: 20vh;
+        padding: 2%;
+        margin: 2%;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Noto Sans', sans-serif;
 
-    padding: 2%;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Noto Sans', sans-serif;
+    }
 
-    padding: 0;
+    .amount,
+    .recalculation {
+        font-size: 2.5vw;
+        font-family: 'Noto Sans Malayalam';
+        font-weight: bold;
+        margin: 1vh;
+    }
+
+    .switcher {
+        cursor: pointer;
+
+        padding-left: 4%;
+        padding-right: 4%;
+        margin: 10% 7%;
+    }
+
 }
 
-.switcher {
-    cursor: pointer;
-    width: 5vh;
-    margin: 0;
-    padding: 0%;
+@media screen and (max-width: 525px) {
+    .convertor {
+        display: grid;
+        grid-template-columns: 75vw;
+        grid-template-rows: 25vh 7vh 25vh;
+        padding: 2%;
+        margin: 2%;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Noto Sans', sans-serif;
+
+    }
+
+    .switcher {
+        cursor: pointer;
+        width: 25%;
+        vertical-align: middle;
+        display: flex;
+        align-self: center;
+        justify-self: center;
+    }
+
+    .amount,
+    .recalculation {
+        font-size: 3vh;
+        font-family: 'Noto Sans Malayalam';
+        font-weight: bold;
+        margin: 1vh;
+    }
+
+    .timestamp {
+        color: grey;
+        margin: 0;
+        margin-top: 1.5vw;
+        padding: 0;
+        font-size: 85%;
+        width: 90%;
+    }
+
 }
 
 .switcher:hover {
     stroke: #cdcdcd;
     fill: #cdcdcd;
 
-}
-
-
-.amount,
-.recalculation {
-    font-size: 4vw;
-    font-family: 'Noto Sans Malayalam';
-    font-weight: bold;
-    margin: 1vh;
-    
 }
 
 .country-currency {
@@ -86,6 +128,7 @@ select:focus {
 
 .count {
     border: #cdcdcd 1px solid;
+
 }
 
 .currency-to-one {
