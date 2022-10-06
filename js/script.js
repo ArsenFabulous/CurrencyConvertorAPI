@@ -23,8 +23,10 @@ function getCurrenciesAndTime() {
 window.addEventListener("load", async function () {
   greyCurrencyChange();
   inputChange();
+  makeTimeMark();
   if (!localStorage.getItem('USD') && !localStorage.getItem('EUR')) {
     await getCurrenciesAndTime();
+    
 
   } else {
     console.log('без подзагрузки');
@@ -236,4 +238,6 @@ function inputChangeRight(leftInput) {
 };
 
 let timeMark = document.querySelector('.timestamp');
+function makeTimeMark() {
 timeMark.textContent = (`Данные за ${(new Date(Number(`${localStorage.getItem('time')}000`)))}`);
+};
